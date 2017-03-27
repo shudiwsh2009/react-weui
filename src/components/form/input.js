@@ -6,19 +6,29 @@ import classNames from '../../utils/classnames';
  * WeUI Input wrapper for `input`
  *
  */
-const Input = (props) => {
-    const { className, ...others } = props;
-    const cls = classNames({
-        'weui-input': true,
-        [className]: className
-    });
+export default class Input extends React.Component {
+    focus() {
+        this.textInput.focus();
+    }
 
-    return (
-        <div>
-            <input className={cls} {...others}/>
-            <span className="weui-icon-checked"></span>
-        </div>
-    );
+    render() {
+        const { className, ...others } = this.props;
+        const cls = classNames({
+            'weui-input': true,
+            [className]: className
+        });
+
+        return (
+            <div>
+                <input
+                    ref={(input) => { this.textInput = input; }}
+                    className={cls}
+                    {...others}
+                />
+                <span className="weui-icon-checked"></span>
+            </div>
+        );
+    }
 };
 
 Input.propTypes = {
@@ -28,5 +38,3 @@ Input.propTypes = {
 Input.defaultProps = {
     defaultValue: undefined
 };
-
-export default Input;

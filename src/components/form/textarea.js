@@ -37,6 +37,10 @@ export default class TextArea extends Component {
         if (this.props.onChange) this.props.onChange(e);
     }
 
+    focus() {
+        this.textareaInput.focus();
+    }
+
     render(){
         const { className, children, showCounter, maxLength, onChange, ...others } = this.props;
         const cls = classNames({
@@ -47,6 +51,7 @@ export default class TextArea extends Component {
         return (
             <div>
                 <textarea
+                ref={(textarea) => { this.textareaInput = textarea; }}
                 className={cls}
                 maxLength={maxLength}
                 onChange={this.handleChange.bind(this)}

@@ -31,6 +31,10 @@ export default class Select extends Component {
         ));
     }
 
+    focus() {
+        this.selectInput.focus();
+    }
+
     render() {
         const { className, data, children, ...others } = this.props;
         const cls = classNames({
@@ -39,7 +43,10 @@ export default class Select extends Component {
         });
 
         return (
-            <select className={cls} {...others}>
+            <select
+                ref={(select) => { this.selectInput = select; }}
+                className={cls}
+                {...others}>
                 {data.length > 0 ? this.renderData(data) : children}
             </select>
         );
